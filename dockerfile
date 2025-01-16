@@ -1,9 +1,15 @@
-From python:3.9-slim
+# Use an official Python runtime as a parent image
+FROM python:3.10-slim
 
-workdir /app 
+# Set the working directory inside the container
+WORKDIR /app
 
-copy . /app/
+# Copy the requirements.txt and app.py into the container
+COPY requirements.txt /app/
+COPY app.py /app/
 
-entrypoint ["python"]
+# Install the dependencies from the requirements.txt file
+RUN pip install --no-cache-dir -r requirements.txt
 
-cmd ["file.py"]
+# Set the default command to run the app using Python
+CMD ["python", "app.py"]
